@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Preview Course in FigJam workspace overview</title>
+  <desc id="desc">Synthetic course hub, weekly slide cards, concept map, and glossary layout.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#334155" flood-opacity=".12"/></filter>
+    <style>
+      .t{font-family:Inter,"PingFang SC",Arial,sans-serif;fill:#172033}.h{font-weight:700}.s{fill:#64748b}.tiny{font-size:15px}.small{font-size:18px}.mid{font-size:22px}.big{font-size:34px}
+    </style>
+  </defs>
+  <rect width="1600" height="900" rx="28" fill="#f7f7ff"/>
+  <text x="58" y="66" class="t h big">Course Preview Workspace · Synthetic Demo</text>
+  <text x="58" y="99" class="t s small">One isolated FigJam per course · slide-aligned notes · weekly review</text>
+
+  <g filter="url(#shadow)">
+    <rect x="50" y="135" width="290" height="710" rx="24" fill="#ffffff" stroke="#d7dcff" stroke-width="2"/>
+    <rect x="72" y="158" width="246" height="92" rx="16" fill="#e9edff"/>
+    <text x="94" y="193" class="t h mid">Course Hub</text>
+    <text x="94" y="221" class="t s tiny">DEMO 101 · Learning Lab</text>
+    <text x="76" y="298" class="t h small">Semester A</text>
+    <rect x="76" y="319" width="238" height="86" rx="14" fill="#eefbf8" stroke="#9bdfd0"/>
+    <text x="95" y="349" class="t h small">Week 01</text><text x="95" y="376" class="t s tiny">3 modules · 42 terms</text>
+    <rect x="76" y="418" width="238" height="86" rx="14" fill="#fff8e9" stroke="#f6d589"/>
+    <text x="95" y="448" class="t h small">Week 02</text><text x="95" y="475" class="t s tiny">Initialized · not previewed</text>
+    <text x="76" y="551" class="t h small">Master Glossary</text>
+    <rect x="76" y="570" width="238" height="68" rx="14" fill="#f5efff" stroke="#d6b8ff"/>
+    <text x="95" y="600" class="t h small">42 terms ↗</text><text x="95" y="623" class="t s tiny">Open Week 01 wrap-up</text>
+    <rect x="76" y="686" width="238" height="112" rx="16" fill="#f8fafc" stroke="#dbe3ec"/>
+    <text x="95" y="719" class="t h tiny">Course isolation</text>
+    <text x="95" y="746" class="t s tiny">Stable course key</text>
+    <text x="95" y="771" class="t s tiny">Independent Figma file</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="370" y="135" width="1180" height="710" rx="24" fill="#ffffff" stroke="#dedff4" stroke-width="2"/>
+    <text x="405" y="181" class="t h mid">Week 01 · Module-based preview</text>
+    <text x="405" y="211" class="t s tiny">All pages initialized first; detailed notes are completed by module.</text>
+
+    <g>
+      <rect x="405" y="242" width="348" height="260" rx="18" fill="#f8faff" stroke="#bfcbff"/>
+      <rect x="421" y="260" width="202" height="142" rx="10" fill="#dbe6ff"/>
+      <rect x="437" y="280" width="132" height="10" rx="5" fill="#7393e8"/>
+      <rect x="437" y="306" width="167" height="7" rx="3" fill="#a8b9ea"/>
+      <rect x="437" y="325" width="146" height="7" rx="3" fill="#a8b9ea"/>
+      <rect x="637" y="260" width="100" height="214" rx="10" fill="#fff2bd"/>
+      <text x="649" y="287" class="t h tiny">核心</text><text x="649" y="316" class="t s tiny">术语</text><text x="649" y="345" class="t s tiny">概念</text>
+      <text x="421" y="469" class="t h tiny">W01-P001</text>
+    </g>
+    <g>
+      <rect x="781" y="242" width="348" height="260" rx="18" fill="#f8faff" stroke="#bfcbff"/>
+      <rect x="797" y="260" width="202" height="142" rx="10" fill="#e8ddff"/>
+      <circle cx="898" cy="331" r="44" fill="#9b7be7" opacity=".75"/>
+      <rect x="1013" y="260" width="100" height="214" rx="10" fill="#dff8f1"/>
+      <text x="1025" y="287" class="t h tiny">核心</text><text x="1025" y="316" class="t s tiny">术语</text><text x="1025" y="345" class="t s tiny">关系</text>
+      <text x="797" y="469" class="t h tiny">W01-P002</text>
+    </g>
+    <g>
+      <rect x="1157" y="242" width="348" height="260" rx="18" fill="#f8faff" stroke="#bfcbff"/>
+      <rect x="1173" y="260" width="202" height="142" rx="10" fill="#f0f2f6"/>
+      <rect x="1204" y="293" width="140" height="78" rx="16" fill="#c7ccd8"/>
+      <rect x="1389" y="260" width="100" height="214" rx="10" fill="#f3f4f6"/>
+      <text x="1401" y="287" class="t h tiny">图片页</text><text x="1401" y="318" class="t s tiny">保留</text><text x="1401" y="347" class="t s tiny">不推导</text>
+      <text x="1173" y="469" class="t h tiny">W01-P003</text>
+    </g>
+
+    <rect x="405" y="535" width="515" height="270" rx="18" fill="#f5f2ff" stroke="#d4c4ff"/>
+    <text x="430" y="569" class="t h small">Linked Concept Map</text>
+    <rect x="430" y="647" width="104" height="56" rx="18" fill="#cfe0ff" stroke="#598cff"/>
+    <text x="456" y="680" class="t h tiny">Week 01</text>
+    <path d="M534 675 C580 675 578 611 625 611M534 675 C580 675 578 675 625 675M534 675 C580 675 578 739 625 739" fill="none" stroke="#7a8dbe" stroke-width="3"/>
+    <rect x="625" y="584" width="116" height="52" rx="16" fill="#dff8f1"/><rect x="625" y="649" width="116" height="52" rx="16" fill="#fff0c9"/><rect x="625" y="714" width="116" height="52" rx="16" fill="#eadcff"/>
+    <text x="649" y="615" class="t tiny">Concept A</text><text x="649" y="680" class="t tiny">Concept B</text><text x="649" y="745" class="t tiny">Concept C</text>
+    <text x="762" y="615" class="t s tiny">→ page links</text><text x="762" y="680" class="t s tiny">→ relationships</text><text x="762" y="745" class="t s tiny">→ key evidence</text>
+
+    <rect x="945" y="535" width="560" height="270" rx="18" fill="#effcfb" stroke="#a8e3dc"/>
+    <text x="970" y="569" class="t h small">Week Wrap-up · Complete Glossary</text>
+    <rect x="970" y="590" width="510" height="42" rx="8" fill="#dbe6ff"/>
+    <text x="986" y="617" class="t h tiny">English term</text><text x="1170" y="617" class="t h tiny">中文释义</text><text x="1378" y="617" class="t h tiny">页面 ↗</text>
+    <g class="t tiny">
+      <rect x="970" y="641" width="510" height="42" fill="#fff" stroke="#e1e7ee"/><text x="986" y="668">Systematic inquiry</text><text x="1170" y="668">系统性探究</text><text x="1378" y="668" fill="#3f6fdb">W01-P004</text>
+      <rect x="970" y="683" width="510" height="42" fill="#f8fafc" stroke="#e1e7ee"/><text x="986" y="710">Inference</text><text x="1170" y="710">推论</text><text x="1378" y="710" fill="#3f6fdb">W01-P008</text>
+      <rect x="970" y="725" width="510" height="42" fill="#fff" stroke="#e1e7ee"/><text x="986" y="752">Operationalization</text><text x="1170" y="752">操作化</text><text x="1378" y="752" fill="#3f6fdb">W01-P012</text>
+    </g>
+  </g>
+</svg>
