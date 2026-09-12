@@ -51,11 +51,11 @@ Do not store slide text, notes, extracted terminology, absolute paths, rendered 
 
 - `initialized`: every original page card exists.
 - `in_progress`: at least one module has detailed notes, but weekly review is incomplete.
-- `complete`: every module, glossary, concept map, link check, and screenshot check passed.
+- `complete`: every module, local note-payload check, Figma read-back audit, glossary, concept map, link check, and screenshot check passed.
 - `revision_pending`: the same week key was supplied with a different fingerprint and awaits the user's choice.
 - `failed`: an explicitly recorded write failure; keep the last successful batch.
 
-Only advance a checkpoint after its corresponding Figma write succeeds. Resume by finding stable node names and starting after `lastBatch`; never blindly recreate earlier batches.
+Only advance a checkpoint after its corresponding Figma write and read-back audit succeed. Resume by finding stable node names and starting after `lastBatch`; never blindly recreate earlier batches. A transport failure may leave partial mutations, so inspect the stable names and actual text before an idempotent retry.
 
 ## Fingerprint and revision behavior
 

@@ -5,7 +5,7 @@ description: Turn uploaded course syllabi and PDF or PPTX slide decks into isola
 
 # Preview Course in FigJam
 
-Build one persistent FigJam per course, initialize every slide for the requested week, and add detailed preview notes one module at a time. Keep different courses isolated through a local registry and stable node names.
+Build one persistent FigJam per course, initialize every slide for the requested week, and add source-grounded, deeply explained bilingual preview notes. Keep different courses isolated through a local registry and stable node names.
 
 ## Load required guidance
 
@@ -16,8 +16,9 @@ Build one persistent FigJam per course, initialize every slide for the requested
 5. Read [references/preview-policy.md](references/preview-policy.md) before writing preview notes.
 6. Read [references/figjam-layout.md](references/figjam-layout.md) before creating or rearranging FigJam content.
 7. Read [references/state-schema.md](references/state-schema.md) before reading or updating the course registry.
+8. Read [references/validation.md](references/validation.md) before validating a note batch or marking a week complete.
 
-Do not browse the web or add outside knowledge by default. Use only the uploaded syllabus, deck, and speaker notes. Browse only if the user explicitly changes this rule.
+Use the current slide and adjacent pages first, then user-designated local course readings. Only when those sources still cannot clarify a concept, perform a limited concept-cluster web check using primary papers or authoritative academic sources. Obey an explicit request not to browse. Put reading and web material in separately labeled, linked support blocks; never blend it into the lecture's own claims.
 
 ## Identify the course and week
 
@@ -38,11 +39,13 @@ python scripts/deck_manifest.py SOURCE --output MANIFEST.json
 Use the manifest as the page-order source of truth. Do not repeatedly extract the same slide text.
 
 - `content`: create the full note template.
-- `low_information`: write one short factual sentence only.
+- `low_information`: write one short factual sentence only, with immediate Chinese parentheses after professional English terms.
 - `image_only`: preserve the slide and page number, but insert the fixed skip note; do not send the image to a vision model.
 - `blank`: preserve the page number and mark it as blank; do not infer content.
 
 Treat short assessment, agenda, divider, recap, and end pages as low-information even if their text count narrowly exceeds the automatic threshold.
+
+Treat automatic `low_information` classification as provisional when a sparse page contains a diagram, model, process, comparison, or other visually meaningful structure. Render and visually inspect those candidates before writing notes; promote the page to `content` when the visual carries a substantive claim, and record the reason in the working payload or audit notes. Do not infer this promotion from text length alone.
 
 ## Resolve the course FigJam
 
@@ -60,34 +63,39 @@ Never place two canonical course keys in the same FigJam. Never hardcode an exam
 2. Upload and place every page image, including image-only and blank pages.
 3. Create the Course Hub, term section, week section, module headers, and every `Wxx-Pxxx` page card before detailed preview begins.
 4. Keep the original slide on the left and its note panel on the right.
-5. Link the Course Hub week entry to the week section.
-6. Write Figma changes in batches of about 12 slides. Record `lastBatch` only after each successful batch.
-7. Set the week status to `initialized` when all page cards exist.
+5. Set all right-side page-note body text to FigJam `Large`; when no named preset is available, use 32 px. Use 36 px semibold section labels, and increase the card height instead of shrinking note text below the Large size.
+6. Link the Course Hub week entry to the week section.
+7. Write Figma changes in batches of about 12 slides. Record `lastBatch` only after each successful batch.
+8. Set the week status to `initialized` when all page cards exist.
 
-Do not automatically write detailed notes for the entire week. Wait for the user to name a Module, Part, Section, or page range.
+Default to the Module, Part, Section, or page range the user names. Complete every module continuously only when the user explicitly requests the whole week.
 
 ## Preview a requested module
 
-1. Read only that module's extracted text and any relevant syllabus text.
-2. Apply the note policy exactly. Use Chinese explanations with the original English keywords.
-3. Do not create quizzes, exercises, flashcards, pronunciation, or parts of speech.
-4. Do not visually analyze `image_only` pages unless the user explicitly requests a specific page later.
-5. Write notes in page order and update FigJam in batches of about 12 pages.
-6. Mark the week `in_progress` and preserve the last successful batch for retry.
-7. Give one concise completion update for the module instead of pausing after every page.
+1. Read the requested pages together with their adjacent pages and relevant syllabus text. Load only the user-designated local readings needed for that concept cluster.
+2. Apply the deep note structure in `preview-policy.md`: 2–3 explanatory core paragraphs, structured terminology, and 3–5 mechanism or comparison points. Do not add a new `课堂确认` section.
+3. In every Chinese explanation, immediately gloss every occurrence of a professional English term with its canonical Chinese rendering. Keep acronym expansions in the terminology section.
+4. Keep `阅读补充 Reading Support` and `外部核实 External Check` visually separate and attach a clickable source to each block.
+5. Do not create quizzes, exercises, flashcards, pronunciation, or parts of speech. Do not visually analyze `image_only` pages unless the user explicitly requests a specific page later.
+6. Save the working page-note payload outside the persistent registry and run `scripts/validate_note_payload.py --strict-warnings` before each Figma write. Resolve every error and warning against the source material. Pass documented author, brand, title, or model-node exceptions through the exact-phrase `--english-exempt` option; never use an exemption for a technical term.
+7. Write notes in page order and update FigJam in batches of about 12 pages. Reflow all three cards in an affected row to the maximum needed height; never shrink 32 px body text.
+8. Mark the week `in_progress` and advance `lastBatch` only after the Figma write and read-back audit both succeed.
+9. Give one concise completion update for the module instead of pausing after every page.
 
 ## Complete the weekly review
 
 After all modules are complete:
 
-1. Collect one structured glossary entry per term and run `glossary_dedupe.py`.
-2. Create the complete native FigJam glossary table: `English term | 中文释义 | 首次出现页面 ↗`.
-3. Link every page cell to its `Wxx-Pxxx` card.
-4. Build a left-to-right concept map with one root, 4–7 main branches, and 18–30 total nodes according to the material.
-5. Put English keywords, a concise Chinese relationship, and relevant page labels in every node; link each node to its representative page.
-6. Place Concept Map and Week Wrap-up in one compact, top-aligned row.
-7. Keep only weekly counts and navigation links in Course Hub; do not duplicate the full glossary there.
-8. Set the week status to `complete` only after screenshots and link validation pass.
+1. Assemble the week's working page payload outside the registry and run `validate_note_payload.py --strict-warnings` across the full week so translation conflicts between batches cannot escape detection.
+2. Collect one structured glossary entry per term and run `glossary_dedupe.py`.
+3. Create the complete native FigJam glossary table: `English term | 中文释义 | 首次出现页面 ↗`.
+4. Link every page cell to its `Wxx-Pxxx` card.
+5. Build a left-to-right concept map with one root, 4–7 main branches, and 18–30 total nodes according to the material.
+6. Put English keywords, a concise Chinese relationship, and relevant page labels in every node; link each node to its representative page.
+7. Place Concept Map and Week Wrap-up in one compact, top-aligned row.
+8. Update Concept Map and Week Wrap-up only when the completed notes add a genuinely new key concept; deeper prose alone is not a reason to rebuild them.
+9. Keep only weekly counts and navigation links in Course Hub; do not duplicate the full glossary there.
+10. Set the week status to `complete` only after local payload validation, live read-back checks, screenshots, and link validation pass.
 
 ## Preserve isolation and recover safely
 
@@ -105,10 +113,22 @@ Verify all of the following:
 
 - Page-card count equals the manifest page count.
 - Every original page number exists exactly once.
+- Every content page contains the required three explanation sections; new notes contain no `课堂确认` block.
+- Every professional English term in explanatory prose is immediately followed by its canonical Chinese rendering, except the explicit exemption classes in `preview-policy.md`.
+- Terminology translations are consistent across notes, concept map, wrap-up, and glossary.
+- Reading and external supplements remain visually separate and their source labels are clickable.
+- Every right-side page-note panel uses Large body text (32 px fallback), every section label uses 36 px semibold, and no text is clipped or overflowed.
+- All cards in a row share the maximum required row height, and later rows, modules, summary areas, and enclosing section bounds are reflowed without overlap.
 - Image-only pages retain the fixed skip note and were not visually analyzed.
 - All glossary entries are unique under case-insensitive Unicode normalization.
 - Every glossary page link and concept-map link resolves to an existing card.
 - Concept Map and Week Wrap-up share the same top coordinate and do not overlap.
 - No node outside the resolved course file was changed.
 
-Take section-level screenshots for visual QA; do not take one screenshot per slide unless diagnosing a specific defect.
+Run the skill structure validator after modifying this skill:
+
+```bash
+python /path/to/skill-creator/scripts/quick_validate.py /path/to/preview-course-in-figjam
+```
+
+Take section-level screenshots plus one dense half-screen card per module for visual QA; do not take one screenshot per slide unless diagnosing a specific defect.

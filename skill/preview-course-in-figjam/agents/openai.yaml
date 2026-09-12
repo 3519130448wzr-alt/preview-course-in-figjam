@@ -1,4 +1,4 @@
 interface:
   display_name: "课程课件预习 · FigJam"
-  short_description: "将课程课件整理成逐页批注、完整术语表与周概念图笔记"
-  default_prompt: "Use $preview-course-in-figjam to initialize this course deck and preview the requested module in FigJam."
+  short_description: "生成逐页深度双语讲解、术语表与概念图 FigJam"
+  default_prompt: "Use $preview-course-in-figjam to initialize this course deck and create source-grounded, deeply explained bilingual notes for the requested scope in FigJam."

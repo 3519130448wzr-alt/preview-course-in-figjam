@@ -13,8 +13,9 @@ An open-source Codex skill that turns uploaded PDF/PPTX course materials into an
 - One independent FigJam file per course; weeks and terms never mix across courses.
 - Initializes the complete weekly deck, then previews one Module/Part at a time.
 - Keeps every original slide beside its annotation panel.
-- Produces concise Chinese explanations while preserving English course keywords.
+- Produces source-grounded, deeply explained Chinese notes while preserving and consistently translating English course keywords.
 - Builds a complete deduplicated glossary and a clickable weekly concept map.
+- Validates note structure, bilingual terminology, and source markers before writing to FigJam.
 - Keeps low-information pages to one sentence.
 - Preserves image-only slides but deliberately skips visual inference to save tokens.
 - Stores only routing/checkpoint metadata locally—never slide text or notes.
@@ -80,7 +81,7 @@ The skill resolves the existing course FigJam through `~/.codex/course-preview/r
 | Image only | Original page plus a fixed skip note; no vision-model inference |
 | Blank | Original page number plus a blank-page marker |
 
-The default workflow uses only uploaded material, does not browse for outside knowledge, does not create quizzes, and does not include pronunciation or parts of speech.
+The workflow uses the lecture deck first, then user-designated course readings. Only when those sources cannot clarify a concept may it run a limited check against primary papers or authoritative academic sources; an explicit no-browse request is always respected. Reading and web supplements stay visibly separate from lecture claims. It does not create quizzes or include pronunciation or parts of speech.
 
 ## Generated FigJam structure
 
@@ -105,6 +106,7 @@ All glossary page labels and concept-map nodes link back to representative slide
 | `render_deck.py` | Render selected PDF/PPTX slides into numbered PNG files |
 | `course_registry.py` | Maintain privacy-minimal course/FigJam routing and checkpoints |
 | `glossary_dedupe.py` | Normalize and deduplicate structured weekly terminology |
+| `validate_note_payload.py` | Check note structure, bilingual terminology consistency, and supplement source markers before FigJam writes |
 
 ## Privacy
 
@@ -123,7 +125,9 @@ The screenshots in this repository are synthetic mockups and contain no real cou
 - 正常知识页提供中文解释并保留英文关键词。
 - 衔接页、Assessment、目录和结束页只做一句话概括。
 - 纯图片页保留原图与页码，但不调用视觉推理，避免浪费 token。
-- 默认只依据用户上传的材料，不联网补充、不出题、不记录词性和发音。
+- 优先依据课件及相邻页面，再按需使用用户指定的课程阅读；仍无法澄清概念时，才做小范围权威来源核实，并将补充内容与课件原意分开标注。用户明确要求不联网时始终遵守。
+- 写入 FigJam 前校验笔记结构、术语翻译一致性及补充来源标记。
+- 不出题，不记录词性和发音。
 - 同一课程在新对话中可通过本机轻量索引继续使用原 FigJam。
 
 安装后，在新对话中上传课件并输入：
